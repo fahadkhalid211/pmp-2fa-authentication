@@ -30,7 +30,7 @@ PMP 2FA Authentication adds a mandatory two-factor authentication step to all lo
 = Requirements =
 
 * WordPress 5.0 or higher
-* PHP 5.6 or higher
+* PHP 7.0 or higher
 * Paid Memberships Pro (free version is sufficient)
 * For SMS: A Twilio account with a valid phone number
 
@@ -49,7 +49,7 @@ PMP 2FA Authentication adds a mandatory two-factor authentication step to all lo
 Yes. The plugin intercepts authentication at the WordPress core level and works with all login methods including PMP's [pmpro_login] shortcode.
 
 = Is the Twilio API key stored securely? =
-Keys are stored in the WordPress options table using standard WordPress sanitization functions.
+Yes. The Twilio Auth Token is encrypted (AES-256-CBC) before being saved to the database and is never echoed back into the settings form.
 
 = What happens if a user doesn't have a phone number saved? =
 If SMS is selected but no phone number is found on the user's profile, the plugin falls back to Email OTP.
