@@ -72,9 +72,9 @@
 			submitBtn.classList.toggle( 'is-loading', on );
 			var txt = submitBtn.querySelector( '.pmp2fa-btn-text' );
 			if ( txt ) {
-				txt.textContent = on
-					? ( i18n.verifying  || 'Verifying…' )
-					: ( i18n.verify_btn || 'Verify Code' );
+				txt.textContent = on ?
+					( i18n.verifying  || 'Verifying…' ) :
+					( i18n.verify_btn || 'Verify Code' );
 			}
 		}
 
