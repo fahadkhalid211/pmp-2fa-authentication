@@ -128,6 +128,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 						?>
 					</p>
 
+					<p class="description" style="margin-bottom:14px;">
+						<strong><?php esc_html_e( 'Third-party data notice:', 'pmp-2fa-authentication' ); ?></strong>
+						<?php esc_html_e( 'When SMS is enabled, a user\'s phone number and one-time code are sent to Twilio to deliver the SMS. Only enable SMS if you disclose this to your users (e.g. in your privacy policy).', 'pmp-2fa-authentication' ); ?>
+					</p>
+
 					<table class="form-table">
 						<tr>
 							<th><label for="pmp2fa-twilio-sid"><?php esc_html_e( 'Account SID', 'pmp-2fa-authentication' ); ?></label></th>
@@ -135,7 +140,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</tr>
 						<tr>
 							<th><label for="pmp2fa-twilio-token"><?php esc_html_e( 'Auth Token', 'pmp-2fa-authentication' ); ?></label></th>
-							<td><input type="password" name="pmp2fa_settings[twilio_token]" id="pmp2fa-twilio-token" value="<?php echo esc_attr( $s['twilio_token'] ); ?>" class="regular-text" autocomplete="new-password"></td>
+							<td>
+							<input type="password" name="pmp2fa_settings[twilio_token]" id="pmp2fa-twilio-token" value="" class="regular-text" autocomplete="new-password" placeholder="<?php echo ! empty( $s['twilio_token'] ) ? esc_attr__( '•••••••• (saved — leave blank to keep)', 'pmp-2fa-authentication' ) : ''; ?>">
+						</td>
 						</tr>
 						<tr>
 							<th><label for="pmp2fa-twilio-from"><?php esc_html_e( 'From Number', 'pmp-2fa-authentication' ); ?></label></th>
@@ -149,6 +156,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<button type="button" id="pmp2fa-test-sms" class="button"><?php esc_html_e( '📱 Send Test SMS', 'pmp-2fa-authentication' ); ?></button>
 						<span id="pmp2fa-sms-result" class="pmp2fa-result" aria-live="polite"></span>
 					</div>
+				</div>
+
+				<div class="pmp2fa-box">
+					<h2>🗑️ <?php esc_html_e( 'Uninstall', 'pmp-2fa-authentication' ); ?></h2>
+					<label>
+						<input type="checkbox" name="pmp2fa_settings[keep_data_on_uninstall]" value="1" <?php checked( $s['keep_data_on_uninstall'], 1 ); ?>>
+						<?php esc_html_e( 'Keep plugin settings and trusted-device data if this plugin is deleted.', 'pmp-2fa-authentication' ); ?>
+					</label>
+					<p class="description"><?php esc_html_e( 'Leave unchecked to remove all plugin data automatically when the plugin is deleted from Plugins > Installed Plugins.', 'pmp-2fa-authentication' ); ?></p>
 				</div>
 
 				<?php submit_button( __( 'Save Settings', 'pmp-2fa-authentication' ) ); ?>

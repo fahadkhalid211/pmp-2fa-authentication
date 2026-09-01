@@ -1,0 +1,535 @@
+# Copyright (C) 2026 Fahad Khalid
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: PMP 2FA Authentication 2.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/fahadkhalid211/pmp-auth\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-01 00:04+0000\n"
+"X-Domain: pmp-2fa-authentication\n"
+
+
+#: admin/settings.php:77
+msgid "\"Both\" method is selected but Twilio credentials are missing. The SMS tab will be hidden from users until you <a href=\"%s\">add your Twilio credentials</a>."
+msgstr ""
+
+#: templates/admin.php:38
+msgid "2FA Method"
+msgstr ""
+
+#: templates/overlay.php:21
+#: templates/standalone.php:35
+msgid "A verification code was sent to %s"
+msgstr ""
+
+#: templates/admin.php:138
+msgid "Account SID"
+msgstr ""
+
+#: includes/hooks.php:523
+msgid "All trusted devices have been revoked. OTP verification is required on your next login."
+msgstr ""
+
+#: templates/admin.php:71
+msgid "Allow \"Trust this device\" option at login"
+msgstr ""
+
+#: templates/admin.php:142
+msgid "Auth Token"
+msgstr ""
+
+#: templates/admin.php:178
+msgid "Author:"
+msgstr ""
+
+#: templates/2fa-page-full.php:521
+#: templates/standalone.php:82
+msgid "Back to login"
+msgstr ""
+
+#: templates/admin.php:51
+msgid "Between 4 and 8 digits."
+msgstr ""
+
+#: templates/admin.php:43
+msgid "Both — user chooses"
+msgstr ""
+
+#: templates/overlay.php:80
+msgid "Cancel &amp; back to login"
+msgstr ""
+
+#: templates/2fa-page-full.php:423
+msgid "Check your inbox"
+msgstr ""
+
+#: includes/otp.php:31
+msgid "Code expired. Please request a new one."
+msgstr ""
+
+#: includes/hooks.php:269
+msgid "Code sent to %s"
+msgstr ""
+
+#: includes/email.php:26
+msgid "Could not send the verification email. Please try again or contact support."
+msgstr ""
+
+#: templates/2fa-page-full.php:439
+msgid "Delivery method"
+msgstr ""
+
+#: includes/email.php:78
+msgid "Do not share this code with anyone."
+msgstr ""
+
+#: templates/admin.php:149
+msgid "E.164 format — e.g. +12223334444"
+msgstr ""
+
+#: includes/hooks.php:391
+msgid "E.164 format, e.g. +12223334444"
+msgstr ""
+
+#: templates/2fa-page-full.php:447
+#: templates/overlay.php:30
+#: templates/standalone.php:43
+msgid "Email"
+msgstr ""
+
+#: templates/admin.php:41
+msgid "Email OTP only"
+msgstr ""
+
+#: templates/admin.php:86
+msgid "Email Settings"
+msgstr ""
+
+#: templates/admin.php:89
+msgid "Email Subject"
+msgstr ""
+
+#: templates/admin.php:114
+msgid "Enter your Account SID, Auth Token, and From Number, then save. Until configured, all OTPs will be sent via email."
+msgstr ""
+
+#: templates/admin.php:225
+msgid "For SMS, users must add a phone number in their profile."
+msgstr ""
+
+#: templates/admin.php:97
+msgid "From Email"
+msgstr ""
+
+#: templates/admin.php:93
+msgid "From Name"
+msgstr ""
+
+#: templates/admin.php:146
+msgid "From Number"
+msgstr ""
+
+#: templates/admin.php:35
+msgid "General"
+msgstr ""
+
+#: includes/email.php:61
+msgid "Hi %s,"
+msgstr ""
+
+#: includes/email.php:79
+msgid "If you did not attempt to log in, please change your password immediately."
+msgstr ""
+
+#: includes/hooks.php:506
+msgid "Invalid request."
+msgstr ""
+
+#: admin/settings.php:289
+msgid "Invalid user."
+msgstr ""
+
+#: templates/admin.php:163
+msgid "Keep plugin settings and trusted-device data if this plugin is deleted."
+msgstr ""
+
+#: templates/admin.php:165
+msgid "Leave unchecked to remove all plugin data automatically when the plugin is deleted from Plugins > Installed Plugins."
+msgstr ""
+
+#: templates/admin.php:61
+msgid "Max OTP requests / hour"
+msgstr ""
+
+#: includes/sms.php:37
+msgid "No phone number is saved on your account. Please use Email OTP or add a phone number in your profile."
+msgstr ""
+
+#: includes/hooks.php:464
+msgid "No trusted devices on record."
+msgstr ""
+
+#: templates/admin.php:55
+msgid "OTP Expiry (minutes)"
+msgstr ""
+
+#: templates/admin.php:48
+msgid "OTP Length (digits)"
+msgstr ""
+
+#: templates/admin.php:223
+msgid "OTPs are hashed — never stored in plain text."
+msgstr ""
+
+#: admin/settings.php:97
+msgid "PMP 2FA Auth"
+msgstr ""
+
+#: templates/admin.php:19
+msgid "PMP 2FA Authentication"
+msgstr ""
+
+#: admin/settings.php:62
+msgid "PMP 2FA Authentication:"
+msgstr ""
+
+#: admin/settings.php:96
+msgid "PMP 2FA Settings"
+msgstr ""
+
+#: includes/hooks.php:517
+msgid "Permission denied."
+msgstr ""
+
+#: includes/hooks.php:381
+msgid "Phone (SMS OTP)"
+msgstr ""
+
+#: admin/settings.php:319
+msgid "Please enter a username, email, or user ID."
+msgstr ""
+
+#: includes/hooks.php:206
+#: includes/hooks.php:303
+msgid "Please enter the verification code."
+msgstr ""
+
+#: templates/admin.php:176
+msgid "Plugin Info"
+msgstr ""
+
+#: templates/admin.php:220
+msgid "Quick Tips"
+msgstr ""
+
+#: admin/settings.php:180
+msgid "Request failed. Please try again."
+msgstr ""
+
+#: templates/admin.php:123
+msgid "Requires a <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">Twilio</a> account. Users must save a phone number in their profile (E.164 format)."
+msgstr ""
+
+#: includes/hooks.php:205
+#: templates/2fa-page-full.php:517
+#: templates/overlay.php:75
+#: templates/standalone.php:77
+msgid "Resend Code"
+msgstr ""
+
+#: templates/admin.php:213
+msgid "Revoke"
+msgstr ""
+
+#: includes/hooks.php:482
+msgid "Revoke All Trusted Devices"
+msgstr ""
+
+#: templates/admin.php:193
+msgid "Revoke My Devices"
+msgstr ""
+
+#: templates/admin.php:187
+msgid "Revoke Trusted Devices"
+msgstr ""
+
+#: admin/settings.php:182
+msgid "Revoke all trusted devices for this user?"
+msgstr ""
+
+#: admin/settings.php:181
+msgid "Revoke all your trusted devices? You will need OTP verification on next login."
+msgstr ""
+
+#: templates/admin.php:200
+msgid "Revoke for a specific user:"
+msgstr ""
+
+#: templates/admin.php:190
+msgid "Revoke your own trusted devices — OTP verification will be required on your next login."
+msgstr ""
+
+#: includes/hooks.php:487
+msgid "Revoking trusted devices means you will need to verify via OTP on your next login from any device."
+msgstr ""
+
+#: templates/2fa-page-full.php:456
+#: templates/overlay.php:33
+#: templates/standalone.php:44
+msgid "SMS"
+msgstr ""
+
+#: admin/settings.php:68
+msgid "SMS OTP is selected but Twilio credentials are not configured. OTPs will fall back to email until you <a href=\"%s\">add your Twilio credentials</a>."
+msgstr ""
+
+#: templates/admin.php:109
+msgid "SMS Settings (Twilio)"
+msgstr ""
+
+#: templates/admin.php:224
+msgid "SMS falls back to email when Twilio is unavailable."
+msgstr ""
+
+#: includes/sms.php:29
+msgid "SMS is not configured. Please contact the site administrator."
+msgstr ""
+
+#: templates/admin.php:42
+msgid "SMS only (Twilio)"
+msgstr ""
+
+#: templates/admin.php:168
+msgid "Save Settings"
+msgstr ""
+
+#: templates/admin.php:201
+msgid "Search by username, email address, or user ID."
+msgstr ""
+
+#: includes/email.php:86
+#: templates/2fa-page-full.php:532
+msgid "Secured by PMP 2FA Authentication"
+msgstr ""
+
+#: includes/hooks.php:513
+msgid "Security check failed."
+msgstr ""
+
+#: includes/hooks.php:228
+msgid "Security check failed. Please refresh and try again."
+msgstr ""
+
+#: includes/hooks.php:288
+msgid "Security check failed. Please refresh the page and try again."
+msgstr ""
+
+#: includes/hooks.php:203
+msgid "Sending code…"
+msgstr ""
+
+#: admin/settings.php:177
+msgid "Sending…"
+msgstr ""
+
+#: includes/hooks.php:296
+msgid "Session expired. Please go back and log in again."
+msgstr ""
+
+#: includes/hooks.php:236
+msgid "Session expired. Please log in again."
+msgstr ""
+
+#: admin/settings.php:198
+msgid "Settings"
+msgstr ""
+
+#: templates/admin.php:181
+msgid "Support:"
+msgstr ""
+
+#: admin/settings.php:255
+msgid "Test SMS sent successfully."
+msgstr ""
+
+#: admin/settings.php:179
+msgid "Test SMS sent."
+msgstr ""
+
+#: admin/settings.php:229
+msgid "Test email sent to %s."
+msgstr ""
+
+#: admin/settings.php:178
+msgid "Test email sent."
+msgstr ""
+
+#: templates/admin.php:132
+msgid "Third-party data notice:"
+msgstr ""
+
+#: includes/otp.php:35
+msgid "Too many incorrect attempts. Please request a new code."
+msgstr ""
+
+#: includes/hooks.php:244
+msgid "Too many requests. Please wait before requesting another code."
+msgstr ""
+
+#: templates/admin.php:67
+msgid "Trust Device"
+msgstr ""
+
+#: templates/admin.php:75
+msgid "Trust duration (days):"
+msgstr ""
+
+#: includes/hooks.php:461
+msgid "Trusted Devices"
+msgstr ""
+
+#: admin/settings.php:299
+msgid "Trusted devices revoked for %s."
+msgstr ""
+
+#: templates/admin.php:226
+msgid "Trusted-device cookies are HttpOnly and hashed."
+msgstr ""
+
+#: includes/sms.php:73
+msgid "Twilio API error."
+msgstr ""
+
+#: templates/admin.php:113
+msgid "Twilio credentials required."
+msgstr ""
+
+#: includes/email.php:52
+#: includes/hooks.php:378
+#: templates/overlay.php:13
+msgid "Two-Factor Authentication"
+msgstr ""
+
+#: includes/hooks.php:458
+msgid "Two-Factor Authentication — Trusted Devices"
+msgstr ""
+
+#: templates/standalone.php:33
+msgid "Two-Step Verification"
+msgstr ""
+
+#: templates/admin.php:20
+msgid "Two-factor authentication for Paid Memberships Pro."
+msgstr ""
+
+#: templates/admin.php:160
+msgid "Uninstall"
+msgstr ""
+
+#: includes/email.php:67
+msgid "Use the code below to complete your login. This code expires in %s."
+msgstr ""
+
+#: admin/settings.php:333
+msgid "User not found."
+msgstr ""
+
+#: templates/admin.php:208
+msgid "Username, email, or user ID"
+msgstr ""
+
+#: includes/email.php:74
+#: templates/2fa-page-full.php:467
+#: templates/overlay.php:42
+#: templates/standalone.php:52
+msgid "Verification Code"
+msgstr ""
+
+#: includes/hooks.php:204
+#: templates/2fa-page-full.php:509
+#: templates/overlay.php:68
+#: templates/standalone.php:70
+msgid "Verify Code"
+msgstr ""
+
+#: templates/overlay.php:19
+#: templates/standalone.php:18
+msgid "Verify Your Identity"
+msgstr ""
+
+#: includes/hooks.php:202
+msgid "Verifying…"
+msgstr ""
+
+#: templates/admin.php:177
+msgid "Version:"
+msgstr ""
+
+#: templates/2fa-page-full.php:428
+msgid "We sent a verification code to %s"
+msgstr ""
+
+#: templates/admin.php:133
+msgid "When SMS is enabled, a user\\'s phone number and one-time code are sent to Twilio to deliver the SMS. Only enable SMS if you disclose this to your users (e.g. in your privacy policy)."
+msgstr ""
+
+#: templates/admin.php:222
+msgid "Works with PMP frontend shortcode login."
+msgstr ""
+
+#: admin/settings.php:272
+msgid "Your trusted devices have been revoked. OTP verification will be required on your next login."
+msgstr ""
+
+#: includes/sms.php:43
+msgid "[%1$s] Your login code: %2$s  (expires in %3$d min). Do not share this code."
+msgstr ""
+
+#: templates/admin.php:102
+msgid "📧 Send Test Email"
+msgstr ""
+
+#: templates/admin.php:154
+msgid "📱 Send Test SMS"
+msgstr ""
+
+#: includes/email.php:35
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/2fa-page-full.php:488
+msgid "Expires in %d minute"
+msgid_plural "Expires in %d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/overlay.php:55
+#: templates/standalone.php:57
+msgid "Expires in %d minute."
+msgid_plural "Expires in %d minutes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/otp.php:44
+msgid "Incorrect code. %d attempt remaining."
+msgid_plural "Incorrect code. %d attempts remaining."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/2fa-page-full.php:501
+#: templates/overlay.php:63
+#: templates/standalone.php:65
+msgid "Trust this device for %d day"
+msgid_plural "Trust this device for %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/hooks.php:470
+msgid "You have %d trusted device."
+msgid_plural "You have %d trusted devices."
+msgstr[0] ""
+msgstr[1] ""

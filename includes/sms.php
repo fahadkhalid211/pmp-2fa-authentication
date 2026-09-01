@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function pmp2fa_send_sms( $user, $otp ) {
 	$s     = pmp2fa_get_settings();
 	$sid   = $s['twilio_sid'];
-	$token = $s['twilio_token'];
+	$token = pmp2fa_decrypt( $s['twilio_token'] );
 	$from  = $s['twilio_from'];
 
 	if ( ! $sid || ! $token || ! $from ) {

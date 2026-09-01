@@ -129,9 +129,13 @@ function pmp2fa_sanitize_settings( $input ) {
 	$clean['rate_limit']  = min( 20,  max( 1,  (int) ( $input['rate_limit']  ?? 5  ) ) );
 	$clean['remember_days'] = min( 365, max( 1, (int) ( $input['remember_days'] ?? 30 ) ) );
 	$clean['remember_device'] = ! empty( $input['remember_device'] ) ? 1 : 0;
+	$clean['keep_data_on_uninstall'] = ! empty( $input['keep_data_on_uninstall'] ) ? 1 : 0;
 
 	$clean['twilio_sid']       = sanitize_text_field( $input['twilio_sid']       ?? '' );
-	$clean['twilio_token']     = sanitize_text_field( $input['twilio_token']     ?? '' );
+	$posted_token              = sanitize_text_field( $input['twilio_token'] ?? '' );
+	$clean['twilio_token']     = ( '' !== $posted_token )
+		? pmp2fa_encrypt( $posted_token )
+		: ( pmp2fa_get_settings()['twilio_token'] ?? '' ); // Keep existing (already encrypted) value.
 	$clean['twilio_from']      = sanitize_text_field( $input['twilio_from']      ?? '' );
 	$clean['email_subject']    = sanitize_text_field( $input['email_subject']    ?? '' );
 	$clean['email_from_name']  = sanitize_text_field( $input['email_from_name']  ?? '' );
@@ -149,7 +153,8 @@ function pmp2fa_sanitize_settings( $input ) {
  * @return void
  */
 function pmp2fa_admin_assets( $hook ) {
-	if ( 'settings_page_pmp2fa-settings' !== $hook ) {
+	$allowed = array( 'settings_page_pmp2fa-settings', 'profile.php', 'user-edit.php' );
+	if ( ! in_array( $hook, $allowed, true ) ) {
 		return;
 	}
 	wp_enqueue_style(

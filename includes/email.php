@@ -49,34 +49,41 @@ function pmp2fa_email_body( $user, $otp, $expiry, $site ) {
     <td style="background:linear-gradient(135deg,#6366f1 0%,#4f46e5 100%);padding:32px 40px;text-align:center;">
       <div style="font-size:42px;margin-bottom:10px;">&#x1F510;</div>
       <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:700;letter-spacing:-0.3px;">' . $s . '</h1>
-      <p style="margin:6px 0 0;color:rgba(255,255,255,0.85);font-size:14px;">Two-Factor Authentication</p>
+      <p style="margin:6px 0 0;color:rgba(255,255,255,0.85);font-size:14px;">' . esc_html__( 'Two-Factor Authentication', 'pmp-2fa-authentication' ) . '</p>
     </td>
   </tr>
 
   <!-- Body -->
   <tr>
     <td style="padding:36px 40px;">
-      <p style="margin:0 0 12px;font-size:16px;color:#1e293b;">Hi ' . $name . ',</p>
+      <p style="margin:0 0 12px;font-size:16px;color:#1e293b;">' . sprintf(
+	/* translators: %s: user display name */
+	esc_html__( 'Hi %s,', 'pmp-2fa-authentication' ),
+	$name
+) . '</p>
       <p style="margin:0 0 28px;font-size:15px;color:#475569;line-height:1.6;">
-        Use the code below to complete your login. This code expires in
-        <strong style="color:#6366f1;">' . esc_html( $et ) . '</strong>.
+        ' . sprintf(
+	/* translators: %s: expiry time, e.g. "10 minutes" */
+	esc_html__( 'Use the code below to complete your login. This code expires in %s.', 'pmp-2fa-authentication' ),
+	'<strong style="color:#6366f1;">' . esc_html( $et ) . '</strong>'
+) . '
       </p>
 
       <!-- OTP Box -->
       <div style="background:#f8faff;border:2px solid #6366f1;border-radius:12px;padding:28px 20px;text-align:center;margin:0 0 28px;">
-        <p style="margin:0 0 10px;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:2px;">Verification Code</p>
+        <p style="margin:0 0 10px;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:2px;">' . esc_html__( 'Verification Code', 'pmp-2fa-authentication' ) . '</p>
         <div style="font-size:42px;font-weight:800;letter-spacing:14px;color:#1e293b;font-family:Courier New,Courier,monospace;">' . $o . '</div>
       </div>
 
-      <p style="margin:0 0 8px;font-size:13px;color:#94a3b8;">&#x26A0;&#xFE0F; Do not share this code with anyone.</p>
-      <p style="margin:0;font-size:13px;color:#94a3b8;">If you did not attempt to log in, please change your password immediately.</p>
+      <p style="margin:0 0 8px;font-size:13px;color:#94a3b8;">&#x26A0;&#xFE0F; ' . esc_html__( 'Do not share this code with anyone.', 'pmp-2fa-authentication' ) . '</p>
+      <p style="margin:0;font-size:13px;color:#94a3b8;">' . esc_html__( 'If you did not attempt to log in, please change your password immediately.', 'pmp-2fa-authentication' ) . '</p>
     </td>
   </tr>
 
   <!-- Footer -->
   <tr>
     <td style="background:#f8fafc;padding:18px 40px;text-align:center;border-top:1px solid #e2e8f0;">
-      <p style="margin:0;font-size:12px;color:#94a3b8;">Secured by PMP 2FA Authentication</p>
+      <p style="margin:0;font-size:12px;color:#94a3b8;">' . esc_html__( 'Secured by PMP 2FA Authentication', 'pmp-2fa-authentication' ) . '</p>
     </td>
   </tr>
 

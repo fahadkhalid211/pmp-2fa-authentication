@@ -165,4 +165,33 @@
 			} );
 	} );
 
+	// ── Profile page: revoke own devices (button carries its own data-*) ───────────
+
+	$( '.pmp2fa-revoke-own' ).on( 'click', function () {
+		if ( ! confirm( i18n.confirm_revoke || 'Revoke all trusted devices? You will need OTP verification on next login.' ) ) {
+			return;
+		}
+		var $btn    = $( this );
+		var $result = $btn.siblings( '.pmp2fa-revoke-own-result' );
+		$btn.prop( 'disabled', true );
+
+		$.post( $btn.data( 'ajaxurl' ), {
+			action:  'pmp2fa_revoke_own_devices',
+			nonce:   $btn.data( 'nonce' ),
+			user_id: $btn.data( 'userid' )
+		} )
+			.done( function ( res ) {
+				$result.css( 'color', res.success ? 'green' : 'red' ).text( res.data.message );
+				if ( res.success ) {
+					$btn.hide();
+				} else {
+					$btn.prop( 'disabled', false );
+				}
+			} )
+			.fail( function () {
+				$result.css( 'color', 'red' ).text( i18n.error || 'An error occurred.' );
+				$btn.prop( 'disabled', false );
+			} );
+	} );
+
 } )( jQuery );

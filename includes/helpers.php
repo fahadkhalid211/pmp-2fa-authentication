@@ -9,6 +9,46 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// ── Encryption for secrets at rest (Twilio Auth Token) ───────────────────────
+//
+// Not a substitute for filesystem/DB security, but avoids storing the token
+// as plain text in wp_options. Falls back to plain storage only if OpenSSL
+// is unavailable (still functional, just unencrypted).
+
+function pmp2fa_encrypt( $value ) {
+	if ( '' === $value || ! function_exists( 'openssl_encrypt' ) ) {
+		return $value;
+	}
+	$key = pmp2fa_encryption_key();
+	$iv  = pmp2fa_make_token( 32 ); // 16 raw bytes, hex-encoded.
+	$raw = openssl_encrypt( $value, 'aes-256-cbc', $key, 0, hex2bin( $iv ) );
+	if ( false === $raw ) {
+		return $value;
+	}
+	return 'pmp2fa_enc:' . $iv . ':' . base64_encode( $raw ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
+}
+
+function pmp2fa_decrypt( $value ) {
+	if ( 0 !== strpos( (string) $value, 'pmp2fa_enc:' ) || ! function_exists( 'openssl_decrypt' ) ) {
+		return $value;
+	}
+	$parts = explode( ':', $value, 3 );
+	if ( count( $parts ) !== 3 ) {
+		return '';
+	}
+	$key = pmp2fa_encryption_key();
+	$iv  = hex2bin( $parts[1] );
+	$out = openssl_decrypt( base64_decode( $parts[2] ), 'aes-256-cbc', $key, 0, $iv ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
+	return false === $out ? '' : $out;
+}
+
+function pmp2fa_encryption_key() {
+	if ( defined( 'AUTH_KEY' ) && AUTH_KEY ) {
+		return hash( 'sha256', AUTH_KEY, true );
+	}
+	return hash( 'sha256', 'pmp2fa_fallback_' . get_option( 'siteurl' ), true );
+}
+
 // ── Settings helper ──────────────────────────────────────────────────────────
 
 function pmp2fa_get_settings() {
@@ -25,6 +65,7 @@ function pmp2fa_get_settings() {
 		'remember_device'  => 1,
 		'remember_days'    => 30,
 		'rate_limit'       => 5,
+		'keep_data_on_uninstall' => 0,
 	);
 	return wp_parse_args( (array) get_option( 'pmp2fa_settings', array() ), $defaults );
 }

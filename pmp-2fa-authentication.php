@@ -5,7 +5,7 @@
  * Description:       Two-Factor Authentication (Email OTP & SMS via Twilio) for Paid Memberships Pro. Works with PMP frontend shortcode login forms and wp-login.php.
  * Version:           2.0.0
  * Requires at least: 5.0
- * Requires PHP:      5.6
+ * Requires PHP:      7.0
  * Author:            Fahad Khalid
  * Author URI:        https://linktr.ee/fahadkhalid211
  * License:           GPL v2 or later

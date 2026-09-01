@@ -189,13 +189,26 @@ function pmp2fa_render_2fa_modal( $user_id ) {
 		$logo_url = $logo_id ? wp_get_attachment_image_url( $logo_id, 'medium' ) : '';
 	}
 
-	// Inline CSS/JS fallback — used when enqueue hooks fired too late.
-	$css = file_exists( PMP2FA_PLUGIN_DIR . 'public/css/overlay.css' )
-		? file_get_contents( PMP2FA_PLUGIN_DIR . 'public/css/overlay.css' ) // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-		: '';
-	$js  = file_exists( PMP2FA_PLUGIN_DIR . 'public/js/overlay.js' )
-		? file_get_contents( PMP2FA_PLUGIN_DIR . 'public/js/overlay.js' ) // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-		: '';
+	// Config data for overlay.js, attached via wp_add_inline_script (no raw
+	// <script> tags in the template — required by marketplace JS standards).
+	wp_add_inline_script(
+		'pmp2fa-overlay',
+		'window.pmp2fa_cfg = ' . wp_json_encode(
+			array(
+				'ajax_url'   => admin_url( 'admin-ajax.php' ),
+				'nonce'      => $nonce,
+				'is_overlay' => true,
+				'i18n'       => array(
+					'verifying'  => __( 'Verifying…', 'pmp-2fa-authentication' ),
+					'sending'    => __( 'Sending code…', 'pmp-2fa-authentication' ),
+					'verify_btn' => __( 'Verify Code', 'pmp-2fa-authentication' ),
+					'resend_btn' => __( 'Resend Code', 'pmp-2fa-authentication' ),
+					'enter_code' => __( 'Please enter the verification code.', 'pmp-2fa-authentication' ),
+				),
+			)
+		) . ';',
+		'before'
+	);
 
 	include PMP2FA_PLUGIN_DIR . 'templates/2fa-page-full.php';
 }
@@ -477,41 +490,9 @@ function pmp2fa_profile_trusted_devices( $user ) {
 			</tr>
 		</table>
 	</div>
-	<script>
-	( function () {
-		var btns = document.querySelectorAll( '.pmp2fa-revoke-own' );
-		btns.forEach( function ( btn ) {
-			btn.addEventListener( 'click', function () {
-				if ( ! confirm( '<?php echo esc_js( __( 'Revoke all trusted devices? You will need OTP verification on next login.', 'pmp-2fa-authentication' ) ); ?>' ) ) {
-					return;
-				}
-				var result = btn.parentNode.querySelector( '.pmp2fa-revoke-own-result' );
-				btn.disabled = true;
-				var xhr = new XMLHttpRequest();
-				xhr.open( 'POST', btn.getAttribute( 'data-ajaxurl' ), true );
-				xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
-				xhr.onload = function () {
-					try {
-						var res = JSON.parse( xhr.responseText );
-						result.style.color = res.success ? 'green' : 'red';
-						result.textContent  = res.data.message;
-						if ( res.success ) { btn.style.display = 'none'; }
-						else { btn.disabled = false; }
-					} catch ( e ) {
-						result.textContent = '<?php echo esc_js( __( 'An error occurred.', 'pmp-2fa-authentication' ) ); ?>';
-						btn.disabled = false;
-					}
-				};
-				xhr.send(
-					'action=pmp2fa_revoke_own_devices' +
-					'&nonce='   + encodeURIComponent( btn.getAttribute( 'data-nonce' ) ) +
-					'&user_id=' + encodeURIComponent( btn.getAttribute( 'data-userid' ) )
-				);
-			} );
-		} );
-	} )();
-	</script>
 	<?php
+	// Click handling lives in public/js/admin.js (enqueued in pmp2fa_admin_assets()
+	// for profile.php / user-edit.php) — no inline <script> per marketplace JS standards.
 }
 
 /**
