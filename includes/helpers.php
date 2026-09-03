@@ -9,11 +9,8 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-// ── Encryption for secrets at rest (Twilio Auth Token) ───────────────────────
-//
-// Not a substitute for filesystem/DB security, but avoids storing the token
-// as plain text in wp_options. Falls back to plain storage only if OpenSSL
-// is unavailable (still functional, just unencrypted).
+// Encrypts the Twilio Auth Token before it's stored in wp_options.
+// Falls back to plain storage if OpenSSL isn't available.
 
 function pmp2fa_encrypt( $value ) {
 	if ( '' === $value || ! function_exists( 'openssl_encrypt' ) ) {

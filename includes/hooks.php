@@ -189,8 +189,8 @@ function pmp2fa_render_2fa_modal( $user_id ) {
 		$logo_url = $logo_id ? wp_get_attachment_image_url( $logo_id, 'medium' ) : '';
 	}
 
-	// Config data for overlay.js, attached via wp_add_inline_script (no raw
-	// <script> tags in the template — required by marketplace JS standards).
+	// Pass config to overlay.js as a localized variable instead of an
+	// inline <script> tag.
 	wp_add_inline_script(
 		'pmp2fa-overlay',
 		'window.pmp2fa_cfg = ' . wp_json_encode(
@@ -491,8 +491,8 @@ function pmp2fa_profile_trusted_devices( $user ) {
 		</table>
 	</div>
 	<?php
-	// Click handling lives in public/js/admin.js (enqueued in pmp2fa_admin_assets()
-	// for profile.php / user-edit.php) — no inline <script> per marketplace JS standards.
+	// Click handling lives in public/js/admin.js (enqueued for
+	// profile.php / user-edit.php in pmp2fa_admin_assets()).
 }
 
 /**
