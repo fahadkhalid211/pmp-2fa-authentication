@@ -64,8 +64,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<h2 id="pmp2fa-modal-title" class="pmp2fa-modal__title"><?php esc_html_e( 'Check your inbox', 'pmp-2fa-authentication' ); ?></h2>
 			<p class="pmp2fa-modal__subtitle" id="pmp2fa-dest-msg">
 				<?php
-				/* translators: %s: masked email address or phone number */
 				printf(
+					/* translators: %s: masked email address or phone number */
 					esc_html__( 'We sent a verification code to %s', 'pmp-2fa-authentication' ),
 					'<strong>' . esc_html( $masked ) . '</strong>'
 				);

@@ -13,10 +13,10 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-$settings = get_option( 'pmp2fa_settings', array() );
+$pmp2fa_settings = get_option( 'pmp2fa_settings', array() );
 
 // Respect the "keep my data" choice — do nothing further if set.
-if ( ! empty( $settings['keep_data_on_uninstall'] ) ) {
+if ( ! empty( $pmp2fa_settings['keep_data_on_uninstall'] ) ) {
 	return;
 }
 
@@ -24,12 +24,14 @@ global $wpdb;
 
 delete_option( 'pmp2fa_settings' );
 
-$user_ids = $wpdb->get_col(
-	"SELECT DISTINCT user_id FROM {$wpdb->usermeta} WHERE meta_key IN ('_pmp2fa_trusted','_pmp2fa_token','pmp2fa_phone')"
+// Direct query is required here: uninstall.php runs once, outside any
+// cacheable request context, so there is nothing to cache against.
+$pmp2fa_user_ids = $wpdb->get_col(
+	"SELECT DISTINCT user_id FROM {$wpdb->usermeta} WHERE meta_key IN ('_pmp2fa_trusted','_pmp2fa_token','pmp2fa_phone')" // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 );
 
-foreach ( $user_ids as $user_id ) {
-	delete_user_meta( $user_id, '_pmp2fa_trusted' );
-	delete_user_meta( $user_id, '_pmp2fa_token' );
-	delete_user_meta( $user_id, 'pmp2fa_phone' );
+foreach ( $pmp2fa_user_ids as $pmp2fa_user_id ) {
+	delete_user_meta( $pmp2fa_user_id, '_pmp2fa_trusted' );
+	delete_user_meta( $pmp2fa_user_id, '_pmp2fa_token' );
+	delete_user_meta( $pmp2fa_user_id, 'pmp2fa_phone' );
 }
