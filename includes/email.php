@@ -38,7 +38,25 @@ function pmp2fa_email_body( $user, $otp, $expiry, $site ) {
 
 	return '<!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no">
+<style>
+  /* Prevent Apple Mail / iOS / Gmail from auto-linking the site name or
+     code and overriding the inline white text color with default blue. */
+  a[x-apple-data-detectors],
+  .pmp2fa-no-autolink a {
+    color: inherit !important;
+    text-decoration: none !important;
+    font-size: inherit !important;
+    font-family: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+  }
+  u + #body a { color: inherit; text-decoration: none; }
+</style>
+</head>
 <body style="margin:0;padding:0;background:#f4f6f9;font-family:Arial,Helvetica,sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f9;padding:40px 20px;">
 <tr><td align="center">
@@ -48,7 +66,7 @@ function pmp2fa_email_body( $user, $otp, $expiry, $site ) {
   <tr>
     <td style="background:linear-gradient(135deg,#6366f1 0%,#4f46e5 100%);padding:32px 40px;text-align:center;">
       <div style="font-size:42px;margin-bottom:10px;">&#x1F510;</div>
-      <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:700;letter-spacing:-0.3px;">' . $s . '</h1>
+      <h1 class="pmp2fa-no-autolink" style="margin:0;color:#ffffff !important;font-size:22px;font-weight:700;letter-spacing:-0.3px;">' . $s . '</h1>
       <p style="margin:6px 0 0;color:rgba(255,255,255,0.85);font-size:14px;">' . esc_html__( 'Two-Factor Authentication', 'pmp-2fa-authentication' ) . '</p>
     </td>
   </tr>
