@@ -1,0 +1,31 @@
+name: Deploy via FTP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ftp-deploy:
+    name: Upload to server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./
+          server-dir: /wp-content/plugins/pmp-2fa-authentication/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            README.md
+            Documentation.html
+            .github/**
