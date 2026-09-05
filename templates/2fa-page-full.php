@@ -17,7 +17,6 @@
  *   $otp_length   int
  *   $nonce        string
  *   $cancel_url   string
- *   $ajax_url     string
  *   $site_name    string
  *   $site_url     string
  *   $logo_url     string

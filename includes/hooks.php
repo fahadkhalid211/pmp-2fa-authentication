@@ -144,6 +144,29 @@ function pmp2fa_maybe_show_2fa_page() {
 				PMP2FA_VERSION,
 				true
 			);
+
+			// Must run at enqueue time, not at render time: the script is
+			// printed in the footer at wp_footer priority 20, and inline
+			// scripts attached after a handle has already printed are
+			// silently dropped.
+			wp_add_inline_script(
+				'pmp2fa-overlay',
+				'window.pmp2fa_cfg = ' . wp_json_encode(
+					array(
+						'ajax_url'   => admin_url( 'admin-ajax.php' ),
+						'nonce'      => wp_create_nonce( 'pmp2fa_nonce' ),
+						'is_overlay' => true,
+						'i18n'       => array(
+							'verifying'  => __( 'Verifying…', 'pmp-2fa-authentication' ),
+							'sending'    => __( 'Sending code…', 'pmp-2fa-authentication' ),
+							'verify_btn' => __( 'Verify Code', 'pmp-2fa-authentication' ),
+							'resend_btn' => __( 'Resend Code', 'pmp-2fa-authentication' ),
+							'enter_code' => __( 'Please enter the verification code.', 'pmp-2fa-authentication' ),
+						),
+					)
+				) . ';',
+				'before'
+			);
 		}
 	);
 
@@ -174,7 +197,6 @@ function pmp2fa_render_2fa_modal( $user_id ) {
 	$otp_length   = (int) $settings['otp_length'];
 	$nonce        = wp_create_nonce( 'pmp2fa_nonce' );
 	$cancel_url   = esc_url( pmp2fa_login_url() );
-	$ajax_url     = admin_url( 'admin-ajax.php' );
 	$site_name    = get_bloginfo( 'name' );
 	$site_url     = home_url( '/' );
 
@@ -188,27 +210,6 @@ function pmp2fa_render_2fa_modal( $user_id ) {
 		$logo_id  = get_theme_mod( 'custom_logo' );
 		$logo_url = $logo_id ? wp_get_attachment_image_url( $logo_id, 'medium' ) : '';
 	}
-
-	// Pass config to overlay.js as a localized variable instead of an
-	// inline <script> tag.
-	wp_add_inline_script(
-		'pmp2fa-overlay',
-		'window.pmp2fa_cfg = ' . wp_json_encode(
-			array(
-				'ajax_url'   => admin_url( 'admin-ajax.php' ),
-				'nonce'      => $nonce,
-				'is_overlay' => true,
-				'i18n'       => array(
-					'verifying'  => __( 'Verifying…', 'pmp-2fa-authentication' ),
-					'sending'    => __( 'Sending code…', 'pmp-2fa-authentication' ),
-					'verify_btn' => __( 'Verify Code', 'pmp-2fa-authentication' ),
-					'resend_btn' => __( 'Resend Code', 'pmp-2fa-authentication' ),
-					'enter_code' => __( 'Please enter the verification code.', 'pmp-2fa-authentication' ),
-				),
-			)
-		) . ';',
-		'before'
-	);
 
 	include PMP2FA_PLUGIN_DIR . 'templates/2fa-page-full.php';
 }
